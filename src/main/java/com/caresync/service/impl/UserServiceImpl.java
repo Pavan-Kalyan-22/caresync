@@ -1,0 +1,72 @@
+package com.caresync.service.impl;
+
+import com.caresync.dto.UserResponse;
+import com.caresync.entity.User;
+import com.caresync.exception.ResourceNotFoundException;
+import com.caresync.mapper.UserMapper;
+import com.caresync.repository.UserRepository;
+import com.caresync.service.UserService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Slf4j
+@Transactional
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserResponse getUserById(Long id) {
+        log.info("Fetching user with id: {}", id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        return userMapper.toUserResponse(user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserResponse getUserByEmail(String email) {
+        log.info("Fetching user with email: {}", email);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+        return userMapper.toUserResponse(user);
+    }
+
+    @Override
+    public UserResponse updateUser(String email, UserResponse userResponse) {
+        log.info("Updating user with email: {}", email);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+
+        User updatedUser = userMapper.toUser(user, userResponse);
+        updatedUser = userRepository.save(updatedUser);
+        
+        log.info("User updated successfully: {}", email);
+        return userMapper.toUserResponse(updatedUser);
+    }
+
+    @Override
+    public void deleteUser(String email) {
+        log.info("Deleting user with email: {}", email);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
+        
+        // Soft delete by marking inactive
+        user.setIsActive(false);
+        userRepository.save(user);
+        
+        log.info("User deleted successfully: {}", email);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean userExists(String email) {
+        return userRepository.existsByEmail(email);
+    }
+}

@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: caresync-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: caresync_db
+      MYSQL_USER: caresync_user
+      MYSQL_PASSWORD: caresync_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      interval: 10s
+
+  caresync-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: caresync-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/caresync_db
+      SPRING_DATASOURCE_USERNAME: caresync_user
+      SPRING_DATASOURCE_PASSWORD: caresync_pass
+      JWT_SECRET: caresync-secret-key-min-256-bits-long-for-production-use
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/auth/health"]
+      timeout: 10s
+      retries: 5
+      interval: 10s
+
+volumes:
+  mysql_data:
+    driver: local
