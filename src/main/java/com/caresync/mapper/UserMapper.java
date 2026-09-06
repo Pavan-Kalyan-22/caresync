@@ -1,7 +1,8 @@
-package com.caresync.util;
+package com.caresync.mapper;
 
 import com.caresync.entity.User;
 import com.caresync.dto.UserResponse;
+import com.caresync.dto.UserUpdateRequest;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,6 +31,39 @@ public class UserMapper {
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .build();
+    }
+
+    public void updateUserFromDto(UserUpdateRequest dto, User user) {
+        if (dto == null || user == null) {
+            return;
+        }
+        if (dto.getFullName() != null) {
+            user.setFullName(dto.getFullName());
+        }
+        if (dto.getDateOfBirth() != null) {
+            user.setDateOfBirth(dto.getDateOfBirth());
+        }
+        if (dto.getGender() != null) {
+            user.setGender(User.Gender.valueOf(dto.getGender().toUpperCase()));
+        }
+        if (dto.getHeight() != null) {
+            user.setHeight(dto.getHeight());
+        }
+        if (dto.getWeight() != null) {
+            user.setWeight(dto.getWeight());
+        }
+        if (dto.getCountry() != null) {
+            user.setCountry(dto.getCountry());
+        }
+        if (dto.getOccupation() != null) {
+            user.setOccupation(dto.getOccupation());
+        }
+        if (dto.getPhoneNumber() != null) {
+            user.setPhoneNumber(dto.getPhoneNumber());
+        }
+        if (dto.getProfileImageUrl() != null) {
+            user.setProfileImageUrl(dto.getProfileImageUrl());
+        }
     }
 
     public User toUser(User user, UserResponse response) {

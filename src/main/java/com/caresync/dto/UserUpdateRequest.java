@@ -1,36 +1,25 @@
 package com.caresync.dto;
 
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRegisterRequest {
+public class UserUpdateRequest {
 
-    @NotBlank(message = "Full name is required")
     @Size(min = 2, max = 100, message = "Full name must be between 2 and 100 characters")
     private String fullName;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email should be valid")
-    private String email;
-
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, max = 50, message = "Password must be between 8 and 50 characters")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
-            message = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character")
-    private String password;
-
-    @NotBlank(message = "Confirm password is required")
-    private String confirmPassword;
-
-    @NotNull(message = "Date of birth is required")
     @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
@@ -51,4 +40,7 @@ public class UserRegisterRequest {
 
     @Pattern(regexp = "^$|^[\\d\\-\\+\\s()]{10,20}$", message = "Phone number is invalid")
     private String phoneNumber;
+
+    @Size(max = 255, message = "Profile image URL must not exceed 255 characters")
+    private String profileImageUrl;
 }

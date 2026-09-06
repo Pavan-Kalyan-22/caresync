@@ -2,6 +2,7 @@ package com.caresync.controller;
 
 import com.caresync.dto.ApiResponse;
 import com.caresync.dto.UserResponse;
+import com.caresync.dto.UserUpdateRequest;
 import com.caresync.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -46,10 +47,10 @@ public class UserController {
     @PutMapping("/profile")
     @Operation(summary = "Update user profile", description = "Update the authenticated user's profile information")
     public ResponseEntity<ApiResponse<UserResponse>> updateUserProfile(
-            @Valid @RequestBody UserResponse userResponse,
+            @Valid @RequestBody UserUpdateRequest request,
             Authentication authentication) {
         log.info("Updating profile for user: {}", authentication.getName());
-        UserResponse updatedUser = userService.updateUser(authentication.getName(), userResponse);
+        UserResponse updatedUser = userService.updateUser(authentication.getName(), request);
         return ResponseEntity
                 .ok(ApiResponse.success("User profile updated successfully", updatedUser));
     }

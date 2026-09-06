@@ -1,6 +1,7 @@
 package com.caresync.service;
 
 import com.caresync.dto.UserResponse;
+import com.caresync.dto.UserUpdateRequest;
 
 public interface UserService {
 
@@ -8,7 +9,7 @@ public interface UserService {
 
     UserResponse getUserByEmail(String email);
 
-    UserResponse updateUser(String email, UserResponse userResponse);
+    UserResponse updateUser(String email, UserUpdateRequest updateRequest);
 
     void deleteUser(String email);
 

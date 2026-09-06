@@ -1,5 +1,6 @@
 package com.caresync.config;
 
+import com.caresync.security.JwtAuthenticationEntryPoint;
 import com.caresync.security.JwtAuthenticationFilter;
 import com.caresync.util.JwtUtil;
 import lombok.RequiredArgsConstructor;

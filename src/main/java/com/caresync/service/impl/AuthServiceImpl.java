@@ -285,6 +285,6 @@ public class AuthServiceImpl implements AuthService {
         if (dateOfBirth == null) {
             return null;
         }
-        return java.time.LocalDate.now().getYear() - dateOfBirth.getYear();
+        return java.time.Period.between(dateOfBirth, java.time.LocalDate.now()).getYears();
     }
 }

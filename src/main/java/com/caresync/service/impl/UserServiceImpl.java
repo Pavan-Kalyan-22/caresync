@@ -1,6 +1,7 @@
 package com.caresync.service.impl;
 
 import com.caresync.dto.UserResponse;
+import com.caresync.dto.UserUpdateRequest;
 import com.caresync.entity.User;
 import com.caresync.exception.ResourceNotFoundException;
 import com.caresync.mapper.UserMapper;
@@ -10,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.Period;
 
 @Service
 @Slf4j
@@ -39,13 +43,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse updateUser(String email, UserResponse userResponse) {
+    public UserResponse updateUser(String email, UserUpdateRequest updateRequest) {
         log.info("Updating user with email: {}", email);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
 
-        User updatedUser = userMapper.toUser(user, userResponse);
-        updatedUser = userRepository.save(updatedUser);
+        userMapper.updateUserFromDto(updateRequest, user);
+
+        // DOB is the single source of truth: recalculate age if dateOfBirth was provided
+        if (updateRequest.getDateOfBirth() != null) {
+            user.setAge(Period.between(user.getDateOfBirth(), LocalDate.now()).getYears());
+        }
+
+        User updatedUser = userRepository.save(user);
         
         log.info("User updated successfully: {}", email);
         return userMapper.toUserResponse(updatedUser);
