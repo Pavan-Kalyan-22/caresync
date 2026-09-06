@@ -5,10 +5,10 @@ services:
     image: mysql:8.0
     container_name: caresync-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-}
       MYSQL_DATABASE: caresync_db
       MYSQL_USER: caresync_user
-      MYSQL_PASSWORD: caresync_pass
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-}
     ports:
       - "3306:3306"
     volumes:
@@ -27,10 +27,10 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/caresync_db
       SPRING_DATASOURCE_USERNAME: caresync_user
-      SPRING_DATASOURCE_PASSWORD: caresync_pass
-      JWT_SECRET: caresync-secret-key-min-256-bits-long-for-production-use
-      MAIL_USERNAME: ${MAIL_USERNAME}
-      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD:-}
+      JWT_SECRET: ${JWT_SECRET:-}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
       SPRING_PROFILES_ACTIVE: prod
     ports:
       - "8080:8080"

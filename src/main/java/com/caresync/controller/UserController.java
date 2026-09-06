@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "User Management", description = "User profile and management APIs")
-@CrossOrigin(origins = "*", maxAge = 3600)
 @SecurityRequirement(name = "Bearer Token")
 public class UserController {
 
@@ -37,9 +36,11 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get user by ID", description = "Retrieve user profile by user ID")
-    public ResponseEntity<ApiResponse<UserResponse>> getUserById(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<UserResponse>> getUserById(
+            @PathVariable Long id,
+            Authentication authentication) {
         log.info("Fetching user with id: {}", id);
-        UserResponse userResponse = userService.getUserById(id);
+        UserResponse userResponse = userService.getUserById(id, authentication != null ? authentication.getName() : null);
         return ResponseEntity
                 .ok(ApiResponse.success("User retrieved successfully", userResponse));
     }

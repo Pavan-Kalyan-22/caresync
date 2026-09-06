@@ -14,26 +14,26 @@ spring:
     open-in-view: false
 
   datasource:
-    url: jdbc:mysql://localhost:3306/caresync_dev
-    username: root
-    password: root
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/caresync_dev}
+    username: ${SPRING_DATASOURCE_USERNAME:caresync_dev_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: your-email@gmail.com
-    password: your-app-password
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
 
 server:
   port: 8080
 
 jwt:
-  secret: my-dev-secret-key-at-least-256-bits-long-for-development
+  secret: ${JWT_SECRET:}
   expiration: 86400000
 
 email:
-  from: noreply@caresync.com
+  from: ${MAIL_FROM:noreply@caresync.com}
   otp-expiry: 300
 
 logging:

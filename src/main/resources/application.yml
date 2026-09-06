@@ -16,9 +16,9 @@ spring:
 
   # Datasource Configuration
   datasource:
-    url: jdbc:mysql://localhost:3306/caresync_db
-    username: root
-    password: root
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/caresync_db}
+    username: ${SPRING_DATASOURCE_USERNAME:caresync_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 20
@@ -31,8 +31,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME:your-email@gmail.com}
-    password: ${MAIL_PASSWORD:your-app-password}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
@@ -64,9 +64,17 @@ server:
 
 # JWT Configuration
 jwt:
-  secret: ${JWT_SECRET:your-secret-key-min-256-bits-long-for-production-use}
+  secret: ${JWT_SECRET:}
   expiration: 86400000 # 24 hours in milliseconds
   refresh-expiration: 604800000 # 7 days in milliseconds
+
+# OTP Configuration
+otp:
+  max-attempts: ${OTP_MAX_ATTEMPTS:5}
+
+# CORS Configuration
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
 
 # Email Configuration
 email:

@@ -22,7 +22,7 @@ public class OtpUtil {
         for (int i = 0; i < OTP_LENGTH; i++) {
             otp.append(OTP_CHARACTERS.charAt(random.nextInt(OTP_CHARACTERS.length())));
         }
-        log.debug("OTP generated: {}", otp);
+        log.debug("OTP generated successfully");
         return otp.toString();
     }
 

@@ -35,6 +35,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
+    public UserResponse getUserById(Long id, String authenticatedEmail) {
+        log.info("Fetching user with id: {} by authenticated user: {}", id, authenticatedEmail);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+        if (authenticatedEmail == null || !user.getEmail().equalsIgnoreCase(authenticatedEmail)) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "Access denied: You are not authorized to view another user's profile");
+        }
+        return userMapper.toUserResponse(user);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public UserResponse getUserByEmail(String email) {
         log.info("Fetching user with email: {}", email);
         User user = userRepository.findByEmail(email)

@@ -100,4 +100,8 @@ public class JwtUtil {
     public Long getExpirationTime() {
         return jwtExpiration;
     }
+
+    public Long getRefreshTokenExpirationTime() {
+        return refreshTokenExpiration;
+    }
 }

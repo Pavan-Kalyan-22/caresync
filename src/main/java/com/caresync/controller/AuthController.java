@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import com.caresync.util.JwtUtil;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,10 +21,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "Authentication", description = "Authentication and Authorization APIs")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthController {
 
     private final AuthService authService;
+    private final JwtUtil jwtUtil;
 
     @PostMapping("/register")
     @Operation(summary = "Register a new user", description = "Create a new user account and send verification OTP")
@@ -117,17 +119,28 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    @Operation(summary = "Logout user", description = "Logout the current user")
+    @Operation(summary = "Logout user", description = "Logout the current user and revoke refresh tokens")
     @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Logout successful")
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Logout successful"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "User not authenticated")
     })
     public ResponseEntity<ApiResponse<Void>> logout(
-            @RequestHeader("Authorization") String authHeader) {
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            // Extract email from token or use from SecurityContext
-            log.info("User logout request");
-            authService.logout("user@example.com"); // In real app, extract from JWT
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            Authentication authentication) {
+        String email = null;
+        if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName())) {
+            email = authentication.getName();
+        } else if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            email = jwtUtil.extractEmail(token);
         }
+
+        if (email == null) {
+            throw new com.caresync.exception.UnauthorizedException("User is not authenticated");
+        }
+
+        log.info("User logout request for email: {}", email);
+        authService.logout(email);
         return ResponseEntity
                 .ok(ApiResponse.success("Logout successful"));
     }
