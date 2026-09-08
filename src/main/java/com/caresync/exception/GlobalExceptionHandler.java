@@ -74,6 +74,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(WeatherException.class)
+    public ResponseEntity<ApiResponse<?>> handleWeatherException(
+            WeatherException ex, WebRequest request) {
+        log.error("Weather error: {}", ex.getMessage());
+        HttpStatus status = ex.getStatus() != null ? ex.getStatus() : HttpStatus.SERVICE_UNAVAILABLE;
+        ApiResponse<?> response = ApiResponse.error(ex.getMessage());
+        response.setStatusCode(status.value());
+        return new ResponseEntity<>(response, status);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<?>> handleValidationException(
             MethodArgumentNotValidException ex, WebRequest request) {

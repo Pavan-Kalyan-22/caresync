@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
@@ -20,6 +21,7 @@ public class OtpVerificationRequest {
 
     @NotBlank(message = "OTP is required")
     @Pattern(regexp = "^\\d{6}$", message = "OTP must be a 6-digit number")
+    @ToString.Exclude
     private String otp;
 
     @NotBlank(message = "OTP type is required")
