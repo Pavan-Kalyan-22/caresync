@@ -40,6 +40,6 @@ logging:
   level:
     root: INFO
     com.caresync: DEBUG
-    org.springframework.web: DEBUG
-    org.springframework.security: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
     org.hibernate.SQL: DEBUG

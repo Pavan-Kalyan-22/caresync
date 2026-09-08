@@ -1,0 +1,387 @@
+2026-09-07 21:45:27 [restartedMain] INFO  com.caresync.CareSyncApplication - Starting CareSyncApplication using Java 21.0.10 with PID 1616 (C:\Users\pavan\OneDrive\Desktop\HealthCare\target\classes started by pavan in C:\Users\pavan\OneDrive\Desktop\HealthCare)
+2026-09-07 21:45:27 [restartedMain] DEBUG com.caresync.CareSyncApplication - Running with Spring Boot v3.2.5, Spring v6.1.6
+2026-09-07 21:45:27 [restartedMain] INFO  com.caresync.CareSyncApplication - No active profile set, falling back to 1 default profile: "default"
+2026-09-07 21:45:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-09-07 21:45:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-09-07 21:45:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-07 21:45:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 154 ms. Found 3 JPA repository interfaces.
+2026-09-07 21:45:31 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-09-07 21:45:31 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-09-07 21:45:31 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-09-07 21:45:31 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-09-07 21:45:31 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4308 ms
+2026-09-07 21:45:32 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-07 21:45:32 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-09-07 21:45:32 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-09-07 21:45:33 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-07 21:45:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-09-07 21:45:34 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@433f3a12
+2026-09-07 21:45:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-09-07 21:45:34 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-07 21:45:37 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-07 21:45:37 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-07 21:45:38 [restartedMain] DEBUG c.c.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-09-07 21:45:41 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-09-07 21:45:45 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1cd24da5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79776c12, org.springframework.security.web.context.SecurityContextHolderFilter@fca7220, org.springframework.security.web.header.HeaderWriterFilter@11e6ac34, org.springframework.web.filter.CorsFilter@c72963f, org.springframework.security.web.authentication.logout.LogoutFilter@26e98f5a, com.caresync.security.JwtAuthenticationFilter@5ee6a97f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c9e3f2a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4b48a857, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d4cbef6, org.springframework.security.web.session.SessionManagementFilter@2bd477b1, org.springframework.security.web.access.ExceptionTranslationFilter@7cf81ddd, org.springframework.security.web.access.intercept.AuthorizationFilter@55960adf]
+2026-09-07 21:45:46 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2026-09-07 21:45:47 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path ''
+2026-09-07 21:45:47 [restartedMain] INFO  com.caresync.CareSyncApplication - Started CareSyncApplication in 21.066 seconds (process running for 22.146)
+2026-09-07 21:46:20 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-07 21:46:20 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-09-07 21:46:20 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-09-07 21:46:46 [http-nio-8080-exec-7] INFO  c.caresync.controller.AuthController - Login request for email: test.weather@caresync.com
+2026-09-07 21:46:46 [http-nio-8080-exec-7] INFO  c.c.service.impl.AuthServiceImpl - Attempting login for user: test.weather@caresync.com
+2026-09-07 21:46:46 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+        and u1_0.is_active
+2026-09-07 21:46:46 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* UPDATE
+        RefreshToken r 
+    SET
+        r.isRevoked = true 
+    WHERE
+        r.userEmail = :email 
+        AND r.isRevoked = false */ update refresh_tokens 
+    set
+        is_revoked=1 
+    where
+        user_email=? 
+        and is_revoked=0
+2026-09-07 21:46:46 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.caresync.entity.RefreshToken */insert 
+    into
+        refresh_tokens (created_at, expires_at, is_revoked, token, user_email) 
+    values
+        (?, ?, ?, ?, ?)
+2026-09-07 21:46:47 [http-nio-8080-exec-7] INFO  c.c.service.impl.AuthServiceImpl - User login successful for: test.weather@caresync.com
+2026-09-07 21:46:47 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* update
+        for com.caresync.entity.User */update users 
+    set
+        age=?,
+        country=?,
+        dob=?,
+        email=?,
+        full_name=?,
+        gender=?,
+        height=?,
+        is_active=?,
+        is_email_verified=?,
+        last_login=?,
+        occupation=?,
+        password=?,
+        phone_number=?,
+        profile_image_url=?,
+        updated_at=?,
+        version=?,
+        weight=? 
+    where
+        id=? 
+        and version=?
+2026-09-07 21:47:05 [http-nio-8080-exec-1] INFO  c.caresync.controller.AuthController - Login request for email: test.weather@caresync.com
+2026-09-07 21:47:05 [http-nio-8080-exec-1] INFO  c.c.service.impl.AuthServiceImpl - Attempting login for user: test.weather@caresync.com
+2026-09-07 21:47:05 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+        and u1_0.is_active
+2026-09-07 21:47:05 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* UPDATE
+        RefreshToken r 
+    SET
+        r.isRevoked = true 
+    WHERE
+        r.userEmail = :email 
+        AND r.isRevoked = false */ update refresh_tokens 
+    set
+        is_revoked=1 
+    where
+        user_email=? 
+        and is_revoked=0
+2026-09-07 21:47:05 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* insert for
+        com.caresync.entity.RefreshToken */insert 
+    into
+        refresh_tokens (created_at, expires_at, is_revoked, token, user_email) 
+    values
+        (?, ?, ?, ?, ?)
+2026-09-07 21:47:05 [http-nio-8080-exec-1] INFO  c.c.service.impl.AuthServiceImpl - User login successful for: test.weather@caresync.com
+2026-09-07 21:47:05 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    /* update
+        for com.caresync.entity.User */update users 
+    set
+        age=?,
+        country=?,
+        dob=?,
+        email=?,
+        full_name=?,
+        gender=?,
+        height=?,
+        is_active=?,
+        is_email_verified=?,
+        last_login=?,
+        occupation=?,
+        password=?,
+        phone_number=?,
+        profile_image_url=?,
+        updated_at=?,
+        version=?,
+        weight=? 
+    where
+        id=? 
+        and version=?
+2026-09-07 21:47:05 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:05 [http-nio-8080-exec-4] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:05 [http-nio-8080-exec-4] INFO  c.c.controller.WeatherController - Received request for current weather: city='Bengaluru', lat=null, lon=null
+2026-09-07 21:47:05 [http-nio-8080-exec-4] INFO  c.c.service.impl.WeatherServiceImpl - Processing weather request by city: Bengaluru
+2026-09-07 21:47:05 [http-nio-8080-exec-4] INFO  c.c.client.impl.OpenWeatherApiClient - Fetching current weather from OpenWeatherMap for city: Bengaluru
+2026-09-07 21:47:06 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:06 [http-nio-8080-exec-5] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:06 [http-nio-8080-exec-5] INFO  c.c.controller.WeatherController - Received request for current weather: city='null', lat=12.9716, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-5] INFO  c.c.service.impl.WeatherServiceImpl - Processing weather request by coordinates: lat=12.9716, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-5] INFO  c.c.client.impl.OpenWeatherApiClient - Fetching current weather from OpenWeatherMap for coordinates: lat=12.9716, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:06 [http-nio-8080-exec-8] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:06 [http-nio-8080-exec-8] INFO  c.c.controller.WeatherController - Received request for current weather: city='Bengaluru', lat=12.9716, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-8] INFO  c.c.service.impl.WeatherServiceImpl - Processing weather request by coordinates: lat=12.9716, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-8] INFO  c.c.client.impl.OpenWeatherApiClient - Fetching current weather from OpenWeatherMap for coordinates: lat=12.9716, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-9] ERROR c.c.s.JwtAuthenticationEntryPoint - Responding with unauthorized error. Message - Full authentication is required to access this resource
+2026-09-07 21:47:06 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:06 [http-nio-8080-exec-3] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:06 [http-nio-8080-exec-3] INFO  c.c.controller.WeatherController - Received request for current weather: city='null', lat=null, lon=null
+2026-09-07 21:47:06 [http-nio-8080-exec-3] WARN  c.c.service.impl.WeatherServiceImpl - Weather request missing both city and coordinate parameters
+2026-09-07 21:47:06 [http-nio-8080-exec-3] ERROR c.c.exception.GlobalExceptionHandler - Bad request: Either city or coordinates (latitude and longitude) must be provided
+2026-09-07 21:47:06 [http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.caresync.exception.BadRequestException: Either city or coordinates (latitude and longitude) must be provided]
+2026-09-07 21:47:06 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:06 [http-nio-8080-exec-2] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:06 [http-nio-8080-exec-2] INFO  c.c.controller.WeatherController - Received request for current weather: city='null', lat=100.0, lon=77.5946
+2026-09-07 21:47:06 [http-nio-8080-exec-2] WARN  c.c.service.impl.WeatherServiceImpl - Invalid latitude: 100.0
+2026-09-07 21:47:06 [http-nio-8080-exec-2] ERROR c.c.exception.GlobalExceptionHandler - Bad request: Latitude must be between -90 and 90 degrees
+2026-09-07 21:47:06 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.caresync.exception.BadRequestException: Latitude must be between -90 and 90 degrees]
+2026-09-07 21:47:06 [http-nio-8080-exec-6] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:06 [http-nio-8080-exec-6] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:06 [http-nio-8080-exec-6] INFO  c.c.controller.WeatherController - Received request for current weather: city='null', lat=12.9716, lon=200.0
+2026-09-07 21:47:06 [http-nio-8080-exec-6] WARN  c.c.service.impl.WeatherServiceImpl - Invalid longitude: 200.0
+2026-09-07 21:47:06 [http-nio-8080-exec-6] ERROR c.c.exception.GlobalExceptionHandler - Bad request: Longitude must be between -180 and 180 degrees
+2026-09-07 21:47:06 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.caresync.exception.BadRequestException: Longitude must be between -180 and 180 degrees]
+2026-09-07 21:47:06 [http-nio-8080-exec-7] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.country,
+        u1_0.created_at,
+        u1_0.dob,
+        u1_0.email,
+        u1_0.full_name,
+        u1_0.gender,
+        u1_0.height,
+        u1_0.is_active,
+        u1_0.is_email_verified,
+        u1_0.last_login,
+        u1_0.occupation,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.profile_image_url,
+        u1_0.updated_at,
+        u1_0.version,
+        u1_0.weight 
+    from
+        users u1_0 
+    where
+        u1_0.email=?
+2026-09-07 21:47:06 [http-nio-8080-exec-7] DEBUG c.c.security.JwtAuthenticationFilter - JWT token validated for user: test.weather@caresync.com
+2026-09-07 21:47:06 [http-nio-8080-exec-7] INFO  c.c.controller.WeatherController - Received request for current weather: city='ThisCityDefinitelyDoesNotExist123456', lat=null, lon=null
+2026-09-07 21:47:06 [http-nio-8080-exec-7] INFO  c.c.service.impl.WeatherServiceImpl - Processing weather request by city: ThisCityDefinitelyDoesNotExist123456
+2026-09-07 21:47:06 [http-nio-8080-exec-7] INFO  c.c.client.impl.OpenWeatherApiClient - Fetching current weather from OpenWeatherMap for city: ThisCityDefinitelyDoesNotExist123456
+2026-09-07 21:47:06 [http-nio-8080-exec-7] WARN  c.c.client.impl.OpenWeatherApiClient - Location not found in weather provider: ThisCityDefinitelyDoesNotExist123456
+2026-09-07 21:47:06 [http-nio-8080-exec-7] ERROR c.c.exception.GlobalExceptionHandler - Resource not found: Weather data not found for location: ThisCityDefinitelyDoesNotExist123456
+2026-09-07 21:47:06 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.caresync.exception.ResourceNotFoundException: Weather data not found for location: ThisCityDefinitelyDoesNotExist123456]
