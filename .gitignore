@@ -1,6 +1,39 @@
+# Maven
 target/
-.idea/
-.vscode/
-*.iml
-.DS_Store
+
+# Java
+*.class
+
+# Logs
+logs/
+*.log
+
+# Environment & Secrets
 .env
+.env.*
+!.env.example
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+
+# IDE - VS Code
+.vscode/
+*.code-workspace
+
+# IDE - Eclipse / STS
+.classpath
+.project
+.settings/
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# JVM Crash Logs
+hs_err_pid*
+replay_pid*
+
+# Scratch directory
+scratch/
