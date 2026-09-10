@@ -9,6 +9,7 @@ import com.caresync.exception.BadRequestException;
 import com.caresync.exception.ResourceNotFoundException;
 import com.caresync.repository.UserRepository;
 import com.caresync.repository.WaterIntakeRepository;
+import com.caresync.service.alert.AlertRuleEngine;
 import com.caresync.service.hydration.HydrationCalculationEngine;
 import com.caresync.service.impl.DashboardServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,6 +41,9 @@ class DashboardServiceTest {
 
     @Spy
     private HydrationCalculationEngine calculationEngine = new HydrationCalculationEngine();
+
+    @Spy
+    private AlertRuleEngine alertRuleEngine = new AlertRuleEngine();
 
     @Mock
     private WaterIntakeRepository waterIntakeRepository;

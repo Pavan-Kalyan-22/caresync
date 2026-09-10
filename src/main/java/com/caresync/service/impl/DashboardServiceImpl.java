@@ -10,6 +10,7 @@ import com.caresync.repository.UserRepository;
 import com.caresync.repository.WaterIntakeRepository;
 import com.caresync.service.DashboardService;
 import com.caresync.service.HydrationService;
+import com.caresync.service.alert.AlertRuleEngine;
 import com.caresync.service.hydration.HydrationCalculationEngine;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,7 @@ public class DashboardServiceImpl implements DashboardService {
     private final UserRepository userRepository;
     private final HydrationService hydrationService;
     private final HydrationCalculationEngine calculationEngine;
+    private final AlertRuleEngine alertRuleEngine;
     private final WaterIntakeRepository waterIntakeRepository;
 
     @Setter
@@ -73,8 +75,8 @@ public class DashboardServiceImpl implements DashboardService {
                     .weatherCondition(hydration.getWeatherCondition())
                     .build();
 
-            // Evaluate environmental weather alerts
-            evaluateWeatherAlerts(hydration.getTemperatureCelsius(), hydration.getHumidityPercent(), alerts);
+            // Evaluate environmental weather alerts via AlertRuleEngine
+            alerts.addAll(alertRuleEngine.evaluateDashboardWeatherAlerts(hydration.getTemperatureCelsius(), hydration.getHumidityPercent()));
 
         } catch (BadRequestException | ResourceNotFoundException ex) {
             // Re-throw client validation / user errors directly
@@ -83,16 +85,12 @@ public class DashboardServiceImpl implements DashboardService {
             log.warn("External weather provider failed while generating dashboard for user: {}. Falling back to baseline target: {}",
                     userEmail, ex.getMessage());
 
-            targetMl = calculateBaselineTarget(user);
+            targetMl = calculationEngine.calculateBaselineTarget(user);
             targetLitres = BigDecimal.valueOf(targetMl).divide(BigDecimal.valueOf(1000), 2, RoundingMode.HALF_UP).doubleValue();
             isWeatherAdjusted = false;
             weatherSummary = null;
 
-            alerts.add(DashboardAlertDto.builder()
-                    .type("WEATHER_UNAVAILABLE")
-                    .severity("INFO")
-                    .message("Current weather is unavailable. Showing your baseline hydration target.")
-                    .build());
+            alerts.add(alertRuleEngine.buildWeatherUnavailableAlert());
         }
 
         // 4. Calculate today's water consumption for the authenticated user
@@ -118,8 +116,8 @@ public class DashboardServiceImpl implements DashboardService {
                     .doubleValue();
         }
 
-        // 7. Evaluate hydration intake alerts
-        evaluateHydrationAlerts(consumedMl, targetMl, alerts);
+        // 7. Evaluate hydration intake alerts via AlertRuleEngine
+        alerts.addAll(alertRuleEngine.evaluateDashboardHydrationAlerts(consumedMl, targetMl));
 
         // 8. Assemble composite dashboard response
         UserSummaryDto userSummary = UserSummaryDto.builder()
@@ -156,61 +154,6 @@ public class DashboardServiceImpl implements DashboardService {
         boolean hasCoordinates = hasLat && hasLon;
         if (!hasCity && !hasCoordinates) {
             throw new BadRequestException("Either city or coordinates (latitude and longitude) must be provided for dashboard");
-        }
-    }
-
-    private int calculateBaselineTarget(User user) {
-        if (user.getWeight() == null || user.getWeight() <= 0) {
-            return HydrationCalculationEngine.MIN_DAILY_TARGET_ML;
-        }
-        int baseRequirementMl = (int) Math.round(user.getWeight() * HydrationCalculationEngine.BASE_WATER_ML_PER_KG);
-        HydrationCalculationEngine.ActivityClassification activity = calculationEngine.classifyOccupation(user.getOccupation());
-        int rawTarget = baseRequirementMl + activity.getAdjustmentMl();
-        return Math.max(HydrationCalculationEngine.MIN_DAILY_TARGET_ML,
-                Math.min(HydrationCalculationEngine.MAX_DAILY_TARGET_ML, rawTarget));
-    }
-
-    private void evaluateWeatherAlerts(Double temperature, Integer humidity, List<DashboardAlertDto> alerts) {
-        if (temperature == null) {
-            return;
-        }
-
-        if (temperature >= 35.0) {
-            alerts.add(DashboardAlertDto.builder()
-                    .type("HIGH_TEMPERATURE")
-                    .severity("WARNING")
-                    .message(String.format("High ambient temperature of %.1f°C observed. Perspiration rate increases fluid loss; remember to drink water regularly.", temperature))
-                    .build());
-        } else if (temperature >= 30.0) {
-            alerts.add(DashboardAlertDto.builder()
-                    .type("WARM_TEMPERATURE")
-                    .severity("INFO")
-                    .message(String.format("Warm ambient temperature of %.1f°C observed. Target adjusted to compensate for heat.", temperature))
-                    .build());
-        }
-
-        if (humidity != null && temperature >= 28.0 && humidity >= 70) {
-            alerts.add(DashboardAlertDto.builder()
-                    .type("HIGH_HUMIDITY")
-                    .severity("WARNING")
-                    .message(String.format("High humidity (%d%%) combined with warm temperature restricts sweat evaporation. Extra fluid intake recommended.", humidity))
-                    .build());
-        }
-    }
-
-    private void evaluateHydrationAlerts(int consumedMl, int targetMl, List<DashboardAlertDto> alerts) {
-        if (consumedMl >= targetMl) {
-            alerts.add(DashboardAlertDto.builder()
-                    .type("HYDRATION_GOAL_REACHED")
-                    .severity("INFO")
-                    .message("Daily hydration goal achieved! Great job staying hydrated today.")
-                    .build());
-        } else if (consumedMl == 0) {
-            alerts.add(DashboardAlertDto.builder()
-                    .type("HYDRATION_REMINDER")
-                    .severity("INFO")
-                    .message("You have not logged any water yet today. Remember to stay hydrated.")
-                    .build());
         }
     }
 }

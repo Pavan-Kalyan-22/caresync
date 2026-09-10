@@ -273,6 +273,25 @@ public class HydrationCalculationEngine {
         return sb.toString();
     }
 
+    /**
+     * Calculates the baseline daily hydration target for a user profile
+     * based purely on body weight and occupational physical demand,
+     * clamped to application safety boundaries [1500, 4500] ml.
+     * Used when live weather is unavailable or omitted.
+     *
+     * @param user the user profile
+     * @return baseline daily water target in ml
+     */
+    public int calculateBaselineTarget(User user) {
+        if (user == null || user.getWeight() == null || user.getWeight() <= 0) {
+            return MIN_DAILY_TARGET_ML;
+        }
+        int baseRequirementMl = (int) Math.round(user.getWeight() * BASE_WATER_ML_PER_KG);
+        ActivityClassification activity = classifyOccupation(user.getOccupation());
+        int rawTarget = baseRequirementMl + activity.getAdjustmentMl();
+        return Math.max(MIN_DAILY_TARGET_ML, Math.min(MAX_DAILY_TARGET_ML, rawTarget));
+    }
+
     public enum ActivityClassification {
         SEDENTARY(ACTIVITY_SEDENTARY_ML),
         LIGHTLY_ACTIVE(ACTIVITY_LIGHT_ML),
