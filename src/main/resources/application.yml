@@ -5,7 +5,7 @@ spring:
   # JPA Configuration
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: false
     properties:
       hibernate:
@@ -16,9 +16,9 @@ spring:
 
   # Datasource Configuration
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/caresync_db}
-    username: ${SPRING_DATASOURCE_USERNAME:caresync_user}
-    password: ${SPRING_DATASOURCE_PASSWORD:}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 20
@@ -64,7 +64,7 @@ server:
 
 # JWT Configuration
 jwt:
-  secret: ${JWT_SECRET:}
+  secret: ${JWT_SECRET}
   expiration: 86400000 # 24 hours in milliseconds
   refresh-expiration: 604800000 # 7 days in milliseconds
 
