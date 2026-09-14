@@ -19,6 +19,9 @@ public class EmailServiceImpl implements EmailService {
     @Value("${email.from}")
     private String fromEmail;
 
+    @Value("${otp.email-enabled:true}")
+    private boolean emailEnabled;
+
     @Value("${spring.application.name}")
     private String appName;
 
@@ -28,6 +31,15 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendOtpEmail(String email, String otp) {
+
+        if (!emailEnabled) {
+            log.info(
+                    "OTP email sending is disabled for this environment. Email not sent to: {}",
+                    email
+            );
+            return;
+        }
+
         try {
             String subject = "CareSync - Email Verification OTP";
             String htmlContent = buildOtpEmailTemplate(otp);
@@ -78,22 +90,28 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    private void sendHtmlEmail(String to, String subject, String htmlContent) throws MessagingException {
+    private void sendHtmlEmail(String to, String subject, String htmlContent)
+            throws MessagingException {
+
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
         helper.setFrom(fromEmail);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(htmlContent, true);
+
         mailSender.send(message);
     }
 
     private void sendSimpleEmail(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
+
         message.setFrom(fromEmail);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
+
         mailSender.send(message);
     }
 

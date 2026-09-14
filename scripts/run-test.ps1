@@ -14,6 +14,7 @@ Push-Location $projectRoot
 
 try {
     if ($TestSuite) {
+        
         Write-Host "Running automated test suite with TEST environment..." -ForegroundColor Cyan
         mvn test
     } else {
